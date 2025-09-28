@@ -1,0 +1,313 @@
+/* Top Bar with Gradient */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px 0 32px;
+    background: linear-gradient(90deg, #6a89cc 0%, #221c76 100%);
+    color: #fff;
+    min-height: 60px;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 24px;
+}
+.welcome-msg {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+.logout-form {
+    margin: 0;
+}
+.logout-btn {
+    padding: 10px 24px;
+    background: #fff;
+    color: #6a89cc;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+.logout-btn:hover {
+    background: #6a89cc;
+    color: #fff;
+}
+
+/* Resume Layout */
+.resume-layout {
+    display: flex;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+}
+.resume-left {
+    flex: 1;
+    max-width: 340px;
+    background: linear-gradient(180deg, #6a89cc 0%, #221c76  100%);
+    border-radius: 16px;
+    padding: 32px 24px;
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-img-wrap {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 16px;
+}
+.profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+}
+.resume-name {
+    font-size: 22px;
+    margin: 0;
+    text-align: center;
+}
+.resume-title {
+    font-size: 15px;
+    margin: 6px 0 16px;
+    font-weight: 400;
+    text-align: center;
+}
+.resume-contact p {
+    font-size: 13px;
+    margin: 0;
+    text-align: center;
+}
+.resume-skills {
+    margin-top: 24px;
+    width: 100%;
+}
+.resume-skills h4 {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.resume-skills ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.resume-skills li {
+    font-size: 13px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+/* Right Column */
+.resume-right {
+    flex: 2;
+    min-width: 0;
+}
+.main {
+    background: #e5f4ff;
+    border-radius: 16px;
+    padding: 32px 32px 24px 32px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6a89cc;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+.about-section p {
+    font-size: 15px;
+    color: #222;
+}
+.about-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(106,137,204,0.06);
+    margin-bottom: 24px;
+}
+.edu-block, .work-block, .org-block {
+    background: #f4f8fb;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(106,137,204,0.06);
+}
+.edu-block strong, .work-block strong, .org-block strong {
+    color: #6a89cc;
+    font-size: 16px;
+}
+.project-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 18px;
+    background: #6a89cc;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.project-link:hover {
+    background: #221c76;
+}
+.details {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+}
+.details li {
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 4px;
+}
+.resume-skills {
+    margin-top: 24px;
+    width: 100%;
+}
+.resume-skills h4 {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.skill-item {
+    margin-bottom: 16px;
+}
+.skill-item span {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(300,255,255,0.25);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.skill-level {
+    height: 100%;
+    background: #fff;
+    border-radius: 8px;
+    transition: width 0.6s;
+}
+/* Login Form */
+.login-bg {
+    background: #19194a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, h4, .resume-name, .login-title {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.about-container p,
+.projects-section,
+.education-section,
+.organizations-section,
+.details li {
+    text-align: justify;
+}
+.contact-links {
+    margin-top: 10px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+.contact-link {
+    color: #fff;
+    background: #6a89cc;
+    padding: 6px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.contact-link:hover {
+    background: #221c76;
+}
+.login-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.login-form {
+    background: #fff;
+    padding: 40px 36px 32px 36px;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(30,30,60,0.18);
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    max-width: 380px;
+}
+.login-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #222;
+}
+.login-subtitle {
+    text-align: center;
+    color: #222;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+.login-form label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-size: 1rem;
+    color: #222;
+}
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    background: #f7f7f7;
+}
+.login-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background: #23233a;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.login-btn:hover {
+    background: #39396b;
+}
+.error {
+    color: #e74c3c;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 1rem;
+}
