@@ -1,89 +1,94 @@
 <?php
-// resume.php (Private Dashboard - Requires 'auth' middleware)
+// public_resume.php (Public Page - No Authentication Required)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-session_start();
-
-// Security concept: Laravel Auth middleware spirit (Session Check)
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !isset($_SESSION['resume_id'])) {
-    header('Location: login.php');
-    exit;
-}
 
 require_once 'db_config.php';
 
+$resume_id = $_GET['id'] ?? null;
 $resumeData = null;
 $error = '';
-$resume_id = $_SESSION['resume_id'];
 
-try {
-    $database = new Database();
-    $db = $database->connect();
-    
-    if ($db) {
-        $resumeData = fetchResumeData($db, $resume_id);
-    } else {
-        $error = "Could not load data due to database error.";
+// Retrieve resume for public display (Route::get('/resume/{id}') spirit)
+if (!is_numeric($resume_id) || $resume_id <= 0) {
+    $error = "Invalid resume ID or ID is missing in the URL.";
+} else {
+    try {
+        $database = new Database();
+        $db = $database->connect();
+
+        if ($db) {
+            // ELOQUENT spirit: Fetch data using the ID
+            $resumeData = fetchResumeData($db, $resume_id);
+            if (!$resumeData) {
+                // User::findOrFail($id) spirit
+                $error = "Resume not found for ID: " . htmlspecialchars($resume_id);
+            }
+        } else {
+            $error = "Could not connect to database to retrieve resume.";
+        }
+
+    } catch (Exception $e) {
+        $error = "An unexpected server error occurred.";
     }
-
-} catch (Exception $e) {
-    $error = "An unexpected error occurred.";
 }
 
-if (!$resumeData) {
-    // If no data is found, show a placeholder or error
-    $name = "User";
-    $error = $error ?: "Resume data is currently unavailable.";
-} else {
-    // Assign variables from fetched data
+if ($resumeData) {
+    // Assign variables for template (Blade spirit)
     extract($resumeData);
 }
 
-// Fallback data if DB data fails
-$name = $name ?? "Unknown User";
-$title = $title ?? "Profile Not Configured";
+// Fallback data
+$name = $name ?? "Resume Not Found";
+$title = $title ?? "N/A";
 $address = $address ?? "N/A";
 $email = $email ?? "N/A";
 $phone = $phone ?? "N/A";
-$profile_summary = $profile_summary ?? "Your profile summary goes here.";
+$profile_summary = $profile_summary ?? "No profile summary available.";
 $github_link = $github_link ?? "#";
 $linkedin_link = $linkedin_link ?? "#";
 $skills_list = $skills_list ?? [];
 $education = $education ?? [];
 $works = $works ?? [];
 $organizations = $organizations ?? [];
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo htmlspecialchars($name); ?>'s Dashboard</title>
+    <title>Public Resume: <?php echo htmlspecialchars($name); ?></title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Public view specific styling */
+        .public-top-bar {
+            justify-content: center;
+            background: linear-gradient(90deg, #221c76 0%, #6a89cc 100%);
+            padding: 18px 32px;
+            margin-bottom: 24px;
+        }
+        .public-top-bar .welcome-msg {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="welcome-msg">Welcome, <?php echo htmlspecialchars($name); ?>!</div>
-        <div class="top-actions">
-            <a href="edit_resume.php" class="action-btn edit-btn">Edit Resume</a>
-            <a href="public_resume.php?id=<?php echo $resume_id; ?>" target="_blank" class="action-btn public-btn">Public View</a>
-            <form action="logout.php" method="post" class="logout-form">
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
-        </div>
+    <div class="public-top-bar">
+        <div class="welcome-msg"><?php echo htmlspecialchars($name); ?>'s Public Portfolio</div>
     </div>
     
     <?php if ($error): ?>
         <h2 style="text-align: center; color: #e74c3c; margin-top: 50px;"><?php echo htmlspecialchars($error); ?></h2>
-    <?php endif; ?>
-
+    <?php else: ?>
     <div class="resume-layout">
         <!-- Left Column -->
         <div class="resume-left">
             <div class="profile-img-wrap">
                 <img src="Profile.png" alt="Profile Picture" class="profile-pic">
             </div>
+            <!-- BLADE spirit: <h1>{{ $user->name}}</h1> -->
             <h1 class="resume-name"><?php echo htmlspecialchars($name); ?></h1>
             <h3 class="resume-title"><?php echo htmlspecialchars($title); ?></h3>
             <div class="resume-contact">
@@ -97,6 +102,7 @@ $organizations = $organizations ?? [];
             </div>
             <div class="resume-skills">
                 <h4>Skills</h4>
+                <!-- BLADE spirit: <p>{{ $user->skill}}</p> -->
                 <?php foreach ($skills_list as $skill): ?>
                 <div class="skill-item">
                     <span><?php echo $skill['name']; ?></span>
@@ -156,5 +162,6 @@ $organizations = $organizations ?? [];
             </div>
         </div>
     </div>
+    <?php endif; ?>
 </body>
 </html>
